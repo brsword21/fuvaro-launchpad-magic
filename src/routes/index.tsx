@@ -451,7 +451,7 @@ function Landing() {
         <Hero />
         <Benefits />
         <HowItWorks />
-        
+        <Showcase />
         <Pricing />
         <FAQ />
         <FinalCTA />
