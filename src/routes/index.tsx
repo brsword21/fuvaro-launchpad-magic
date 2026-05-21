@@ -278,39 +278,44 @@ function Showcase() {
           </p>
         </div>
 
-        <div className="mt-16 space-y-20">
-          {items.map((it) => (
-            <div
-              key={it.title}
-              className={`grid lg:grid-cols-2 gap-12 items-center ${
-                it.reverse ? "lg:[&>*:first-child]:order-2" : ""
-              }`}
-            >
-              <div className="relative">
-                <div
-                  className="absolute -inset-6 rounded-3xl blur-3xl opacity-60"
-                  style={{
-                    background:
-                      "radial-gradient(closest-side, rgba(24,200,255,0.35), transparent 70%)",
-                  }}
-                />
-                <div className="relative rounded-3xl overflow-hidden">
-                  <img src={it.img} alt={it.alt} className="w-full h-auto object-contain" />
+        <div className="mt-16 space-y-24">
+          {items.map((it) => {
+            const isWide = it.img === appDesktop;
+            return (
+              <div
+                key={it.title}
+                className={`grid gap-10 items-center ${
+                  isWide
+                    ? "lg:grid-cols-12"
+                    : "lg:grid-cols-2"
+                } ${it.reverse ? "lg:[&>*:first-child]:order-2" : ""}`}
+              >
+                <div className={`relative ${isWide ? "lg:col-span-8" : ""}`}>
+                  <div
+                    className="absolute -inset-6 rounded-3xl blur-3xl opacity-60"
+                    style={{
+                      background:
+                        "radial-gradient(closest-side, rgba(24,200,255,0.35), transparent 70%)",
+                    }}
+                  />
+                  <div className="relative rounded-3xl overflow-hidden">
+                    <img src={it.img} alt={it.alt} className="w-full h-auto object-contain" />
+                  </div>
+                </div>
+                <div className={isWide ? "lg:col-span-4" : ""}>
+                  <div className="text-[11px] uppercase tracking-[0.18em] text-[color:var(--electric)]">
+                    {it.tag}
+                  </div>
+                  <h3 className="mt-3 text-3xl lg:text-4xl font-semibold leading-tight">
+                    {it.title}
+                  </h3>
+                  <p className="mt-4 text-[color:var(--muted-foreground)] leading-relaxed">
+                    {it.desc}
+                  </p>
                 </div>
               </div>
-              <div>
-                <div className="text-[11px] uppercase tracking-[0.18em] text-[color:var(--electric)]">
-                  {it.tag}
-                </div>
-                <h3 className="mt-3 text-3xl lg:text-4xl font-semibold leading-tight">
-                  {it.title}
-                </h3>
-                <p className="mt-4 text-[color:var(--muted-foreground)] leading-relaxed">
-                  {it.desc}
-                </p>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
