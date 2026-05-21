@@ -7,9 +7,6 @@ import {
   MapPin,
   CheckCircle2,
   Compass,
-  Gauge,
-  Users,
-  Sparkles,
   ChevronDown,
 } from "lucide-react";
 import logo from "@/assets/fuvaro-logo.png";
