@@ -11,6 +11,8 @@ import {
 } from "lucide-react";
 import logo from "@/assets/fuvaro-logo.png";
 import truck from "@/assets/fuvaro-truck.png";
+import appMobile from "@/assets/fuvaro-app-mobile.png";
+import appDesktop from "@/assets/fuvaro-app-desktop.png";
 
 export const Route = createFileRoute("/")({
   component: Landing,
