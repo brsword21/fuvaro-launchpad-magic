@@ -449,7 +449,7 @@ function Landing() {
         <Hero />
         <Benefits />
         <HowItWorks />
-        <Features />
+        
         <Pricing />
         <FAQ />
         <FinalCTA />
