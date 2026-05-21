@@ -7,9 +7,6 @@ import {
   MapPin,
   CheckCircle2,
   Compass,
-  Gauge,
-  Users,
-  Sparkles,
   ChevronDown,
 } from "lucide-react";
 import logo from "@/assets/fuvaro-logo.png";
@@ -248,38 +245,8 @@ function HowItWorks() {
   );
 }
 
-function Features() {
-  const items = [
-    { icon: Gauge, title: "Live marża per trasa", desc: "Widzisz natychmiast czy zlecenie jest opłacalne." },
-    { icon: Users, title: "Społeczność kierowców", desc: "Tysiące oczu na drodze — sprawdzone raporty z terenu." },
-    { icon: Sparkles, title: "Inteligentne sugestie", desc: "AI proponuje optymalizacje trasy i kosztów." },
-    { icon: Radio, title: "Powiadomienia real-time", desc: "Kontrole, korki, kolejki — wszystko zanim wyjedziesz." },
-  ];
-  return (
-    <section id="funkcje" className="relative py-28">
-      <div className="mx-auto max-w-7xl px-6 lg:px-10">
-        <div className="max-w-2xl">
-          <span className="chip">Live operations</span>
-          <h2 className="mt-5 text-4xl lg:text-5xl font-bold leading-tight">
-            Wszystko, czego potrzebuje{" "}
-            <span className="text-gradient-cyan">nowoczesna spedycja</span>.
-          </h2>
-        </div>
-        <div className="mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {items.map((f) => (
-            <div key={f.title} className="rounded-2xl glass p-6">
-              <div className="inline-flex items-center justify-center h-10 w-10 rounded-xl bg-[#0B1730] border border-[rgba(24,200,255,0.3)]">
-                <f.icon className="h-4 w-4 text-[color:var(--electric)]" />
-              </div>
-              <h3 className="mt-5 text-base font-semibold">{f.title}</h3>
-              <p className="mt-2 text-sm text-[color:var(--muted-foreground)] leading-relaxed">{f.desc}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
+
+
 
 function Pricing() {
   const plans = [
@@ -482,7 +449,7 @@ function Landing() {
         <Hero />
         <Benefits />
         <HowItWorks />
-        <Features />
+        
         <Pricing />
         <FAQ />
         <FinalCTA />
