@@ -246,6 +246,77 @@ function HowItWorks() {
     </section>
   );
 }
+function Showcase() {
+  const items = [
+    {
+      tag: "Aplikacja mobilna dla kierowców",
+      title: "Społeczność kierowców w terenie",
+      desc: "Kierowcy oceniają punkty logistyczne, dzielą się czasem oczekiwania i sytuacją na miejscu — w czasie rzeczywistym.",
+      img: appMobile,
+      alt: "Fuvaro — aplikacja mobilna dla kierowców",
+      reverse: false,
+    },
+    {
+      tag: "Panel dla spedytora",
+      title: "Kalkulator kosztów trasy",
+      desc: "Pełna kalkulacja paliwa, opłat, czasu kierowcy i marży — z mapą trasy i danymi z miejsc na żywo.",
+      img: appDesktop,
+      alt: "Fuvaro — kalkulator kosztów trasy dla spedytora",
+      reverse: true,
+    },
+  ];
+  return (
+    <section id="aplikacja" className="relative py-28">
+      <div className="mx-auto max-w-7xl px-6 lg:px-10">
+        <div className="max-w-2xl">
+          <span className="chip">Podgląd</span>
+          <h2 className="mt-5 text-4xl lg:text-5xl font-bold leading-tight">
+            Jedno narzędzie. <span className="text-gradient-cyan">Dwie perspektywy.</span>
+          </h2>
+          <p className="mt-4 text-[color:var(--muted-foreground)]">
+            Aplikacja dla kierowców i panel dla spedytora — połączone w czasie rzeczywistym.
+          </p>
+        </div>
+
+        <div className="mt-16 space-y-20">
+          {items.map((it) => (
+            <div
+              key={it.title}
+              className={`grid lg:grid-cols-2 gap-12 items-center ${
+                it.reverse ? "lg:[&>*:first-child]:order-2" : ""
+              }`}
+            >
+              <div className="relative">
+                <div
+                  className="absolute -inset-6 rounded-3xl blur-3xl opacity-60"
+                  style={{
+                    background:
+                      "radial-gradient(closest-side, rgba(24,200,255,0.35), transparent 70%)",
+                  }}
+                />
+                <div className="relative rounded-3xl overflow-hidden">
+                  <img src={it.img} alt={it.alt} className="w-full h-auto object-contain" />
+                </div>
+              </div>
+              <div>
+                <div className="text-[11px] uppercase tracking-[0.18em] text-[color:var(--electric)]">
+                  {it.tag}
+                </div>
+                <h3 className="mt-3 text-3xl lg:text-4xl font-semibold leading-tight">
+                  {it.title}
+                </h3>
+                <p className="mt-4 text-[color:var(--muted-foreground)] leading-relaxed">
+                  {it.desc}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 
 
 
