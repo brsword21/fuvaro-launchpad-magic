@@ -90,7 +90,6 @@
     -webkit-font-smoothing: antialiased;
     background-image:
       radial-gradient(ellipse 80% 50% at 50% -10%, rgba(47, 107, 255, 0.25), transparent 60%);
-    background-attachment: fixed;
   }
 
   h1, h2, h3, h4 {

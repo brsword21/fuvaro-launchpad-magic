@@ -3,11 +3,12 @@ import { useState, useEffect, useRef } from "react";
 import {
   ArrowRight,
   Calculator,
-  Radio,
   MapPin,
   CheckCircle2,
   Compass,
   ChevronDown,
+  Menu,
+  X,
 } from "lucide-react";
 import logo from "@/assets/fuvaro-logo.png";
 import truckBg from "@/assets/fuvaro-truck-bg.png";
@@ -21,6 +22,7 @@ export const Route = createFileRoute("/")({
 });
 
 function Navbar() {
+  const [menuOpen, setMenuOpen] = useState(false);
   const links = [
     { label: "Produkt", href: "#produkt" },
     { label: "Jak to działa", href: "#jak-to-dziala" },
@@ -44,14 +46,47 @@ function Navbar() {
             </a>
           ))}
         </nav>
-        <a
-          href="#waitlist"
-          className="btn-primary inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm"
-        >
-          Dołącz do waitlisty
-          <ArrowRight className="h-4 w-4" />
-        </a>
+        <div className="flex items-center gap-3">
+          <a
+            href="#waitlist"
+            className="btn-primary inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm"
+          >
+            Dołącz do waitlisty
+            <ArrowRight className="h-4 w-4" />
+          </a>
+          <button
+            type="button"
+            className="md:hidden inline-flex items-center justify-center h-10 w-10 rounded-full border border-[rgba(24,200,255,0.22)] text-foreground"
+            aria-label={menuOpen ? "Zamknij menu" : "Otwórz menu"}
+            aria-expanded={menuOpen}
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
+            {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
+        </div>
       </div>
+      {menuOpen && (
+        <div className="md:hidden flex flex-col gap-1 px-6 pb-4 border-t border-[rgba(24,200,255,0.12)]">
+          {links.map((l) => (
+            <a
+              key={l.href}
+              href={l.href}
+              className="py-3 text-sm text-[color:var(--muted-foreground)] hover:text-foreground transition-colors"
+              onClick={() => setMenuOpen(false)}
+            >
+              {l.label}
+            </a>
+          ))}
+          <a
+            href="#waitlist"
+            className="btn-primary mt-2 inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm"
+            onClick={() => setMenuOpen(false)}
+          >
+            Dołącz do waitlisty
+            <ArrowRight className="h-4 w-4" />
+          </a>
+        </div>
+      )}
     </header>
   );
 }
@@ -111,9 +146,8 @@ function Hero() {
             src={truckBg}
             alt=""
             aria-hidden="true"
-            className="absolute inset-0 w-full h-full object-cover"
+            className="absolute inset-0 w-full h-full object-cover object-[60%_50%] lg:object-[52%_50%]"
             style={{
-              objectPosition: "52% 50%",
               maskImage: "linear-gradient(to top, black 0%, black 62%, transparent 100%)",
               WebkitMaskImage: "linear-gradient(to top, black 0%, black 62%, transparent 100%)",
             }}
@@ -222,9 +256,9 @@ function Hero() {
       </div>
 
       {/* ── CONTENT ── */}
-      <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-10 pt-20 pb-32">
+      <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-10 pt-14 pb-20 lg:pt-20 lg:pb-32">
         <div className="max-w-xl lg:max-w-2xl">
-          <h1 className="text-5xl lg:text-[68px] font-bold leading-[1.02] tracking-tight">
+          <h1 className="text-[2.5rem] sm:text-5xl lg:text-[68px] font-bold leading-[1.02] tracking-tight">
             Wycena tras.{" "}
             <span className="text-gradient-cyan">Informacje real-time</span> o punktach logistycznych.
           </h1>
@@ -280,7 +314,7 @@ function Product() {
     },
   ];
   return (
-    <section id="produkt" className="relative py-28">
+    <section id="produkt" className="relative py-16 lg:py-28">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <div className="max-w-2xl mx-auto text-center">
           <h2 className="text-4xl lg:text-5xl font-bold leading-tight">
@@ -299,7 +333,7 @@ function Product() {
                   isWide ? "lg:grid-cols-12" : "lg:grid-cols-2"
                 } ${it.reverse ? "lg:[&>*:first-child]:order-2" : ""}`}
               >
-                <div className={`relative overflow-visible ${isWide ? "lg:col-span-8" : ""}`}>
+                <div className={`relative overflow-hidden lg:overflow-visible ${isWide ? "lg:col-span-8" : ""}`}>
                   <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-visible">
                     <div
                       className="absolute rounded-full"
@@ -374,7 +408,7 @@ function HowItWorks() {
     },
   ];
   return (
-    <section id="jak-to-dziala" className="relative py-28">
+    <section id="jak-to-dziala" className="relative py-16 lg:py-28">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <div className="max-w-2xl mx-auto text-center">
           <h2 className="text-4xl lg:text-5xl font-bold leading-tight">
@@ -430,7 +464,7 @@ function Pricing() {
   ];
   const maxFeatures = Math.max(...plans.map((p) => p.features.length));
   return (
-    <section id="cennik" className="relative overflow-hidden pt-28 pb-32">
+    <section id="cennik" className="relative overflow-hidden pt-16 pb-20 lg:pt-28 lg:pb-32">
       <div
         className="absolute inset-x-0 bottom-0 z-0 pointer-events-none"
         aria-hidden="true"
@@ -495,7 +529,7 @@ function Pricing() {
                     </li>
                   ))}
                   {Array.from({ length: maxFeatures - p.features.length }).map((_, i) => (
-                    <li key={`spacer-${i}`} className="invisible pointer-events-none" aria-hidden="true">
+                    <li key={`spacer-${i}`} className="hidden lg:flex invisible pointer-events-none" aria-hidden="true">
                       <div className="flex items-start gap-3 text-sm">
                         <CheckCircle2 className="h-5 w-5 shrink-0 mt-0.5" />
                         <span>placeholder</span>
@@ -534,7 +568,7 @@ function FAQ() {
   ];
   const [open, setOpen] = useState<number | null>(0);
   return (
-    <section id="faq" className="relative py-28">
+    <section id="faq" className="relative py-16 lg:py-28">
       <div className="mx-auto max-w-4xl px-6 lg:px-10">
         <div className="text-center">
           <h2 className="text-4xl lg:text-5xl font-bold leading-tight">
@@ -584,9 +618,9 @@ function FAQ() {
 
 function FinalCTA() {
   return (
-    <section id="waitlist" className="relative py-28 overflow-visible">
+    <section id="waitlist" className="relative py-16 lg:py-28 overflow-visible">
       <div className="mx-auto max-w-6xl px-6 lg:px-10 overflow-visible">
-        <div className="relative rounded-[2rem] overflow-hidden border border-[rgba(24,200,255,0.28)] px-6 py-12 lg:px-10 lg:py-16 text-center min-h-[520px] lg:min-h-[580px] waitlist-hover-scale">
+        <div className="relative rounded-[2rem] overflow-hidden border border-[rgba(24,200,255,0.28)] px-6 py-12 lg:px-10 lg:py-16 text-center min-h-[460px] lg:min-h-[580px] waitlist-hover-scale">
           <img
             src={truckWaitlist}
             alt=""
@@ -600,6 +634,14 @@ function FinalCTA() {
             style={{
               background:
                 "radial-gradient(ellipse 90% 80% at 50% 55%, rgba(0,150,255,0.18), transparent 70%)",
+            }}
+          />
+
+          <div
+            className="absolute inset-0 pointer-events-none lg:hidden"
+            style={{
+              background:
+                "linear-gradient(to bottom, rgba(5,8,22,0.65) 0%, rgba(5,8,22,0.5) 100%)",
             }}
           />
 
