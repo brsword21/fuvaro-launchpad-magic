@@ -657,15 +657,15 @@ function FinalCTA() {
 
           <div className="absolute inset-0 bg-grid opacity-15 pointer-events-none" />
 
-          <div className="relative z-10 flex flex-col h-full min-h-[440px] lg:min-h-[500px]">
-            <div className="text-center mt-4 lg:mt-8 relative z-10">
+          <div className="relative z-10 min-h-[440px] lg:min-h-[500px]">
+            <div className="absolute top-6 left-0 right-0 z-10 px-6 text-center lg:top-8">
               <h2 className="text-4xl lg:text-6xl font-bold leading-tight tracking-tight">
                 Nie czekaj, aż okazja <span className="text-gradient-cyan">odjedzie</span>
               </h2>
             </div>
 
-            <div className="mt-6 lg:mt-0 lg:absolute lg:inset-0 flex flex-col items-center justify-center text-center px-6">
-              <p className="text-xs lg:text-[13px] text-[color:var(--muted-foreground)] leading-relaxed max-w-[15rem] lg:max-w-[20rem]">
+            <div className="absolute inset-0 z-0 flex flex-col items-center justify-center px-6 text-center">
+              <p className="max-w-[15rem] text-xs leading-relaxed text-[color:var(--muted-foreground)] lg:max-w-[20rem] lg:text-[13px]">
                 Bądź wśród pierwszych, którzy zmienią sposób zarządzania transportem.
               </p>
               <button
@@ -677,7 +677,7 @@ function FinalCTA() {
               </button>
             </div>
 
-            <div className="mt-auto pt-8 lg:pt-0 lg:absolute lg:bottom-6 lg:left-0 lg:right-0 z-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm text-[color:var(--muted-foreground)]">
+            <div className="absolute bottom-6 left-0 right-0 z-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 px-6 text-sm text-[color:var(--muted-foreground)]">
               <span className="inline-flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-[color:var(--electric)]" />Bez zobowiązań</span>
               <span className="inline-flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-[color:var(--electric)]" />Wczesny dostęp</span>
               <span className="inline-flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-[color:var(--electric)]" />Zniżka dla pierwszych</span>
