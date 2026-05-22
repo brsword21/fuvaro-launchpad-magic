@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   ArrowRight,
   Calculator,
@@ -10,9 +10,11 @@ import {
   ChevronDown,
 } from "lucide-react";
 import logo from "@/assets/fuvaro-logo.png";
-import truck from "@/assets/fuvaro-truck.png";
+import truckBg from "@/assets/fuvaro-truck-bg.png";
+import truckWaitlist from "@/assets/row-2-column-2.png";
 import appMobile from "@/assets/fuvaro-app-mobile.png";
 import appDesktop from "@/assets/fuvaro-app-desktop.png";
+import blueBg from "@/assets/blue-bg.png";
 
 export const Route = createFileRoute("/")({
   component: Landing,
@@ -54,22 +56,180 @@ function Navbar() {
   );
 }
 
+const SPEED_LINES = [
+  { top: 6,  left: 4,  width: 32, dur: 2.2, delay: 0,    opacity: 0.26 },
+  { top: 16, left: 18, width: 38, dur: 2.5, delay: -0.9, opacity: 0.24 },
+  { top: 26, left: 8,  width: 42, dur: 2.0, delay: -1.5, opacity: 0.25 },
+  { top: 36, left: 24, width: 34, dur: 2.4, delay: -0.4, opacity: 0.23 },
+  { top: 46, left: 12, width: 40, dur: 2.1, delay: -1.1, opacity: 0.24 },
+  { top: 56, left: 28, width: 36, dur: 2.6, delay: -0.7, opacity: 0.22 },
+  { top: 66, left: 6,  width: 44, dur: 2.3, delay: -1.3, opacity: 0.23 },
+  { top: 76, left: 20, width: 30, dur: 2.0, delay: -0.5, opacity: 0.22 },
+  { top: 86, left: 14, width: 38, dur: 2.4, delay: -1.0, opacity: 0.21 },
+  { top: 94, left: 26, width: 35, dur: 2.2, delay: -0.6, opacity: 0.20 },
+];
+
 function Hero() {
+  const particlesRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const container = particlesRef.current;
+    if (!container) return;
+
+    const spawn = () => {
+      const p = document.createElement("div");
+      p.className = "animate-wind";
+      const dur = 2.2 + Math.random() * 1.4;
+      const top = Math.random() * 100;
+      p.style.top = `${top}%`;
+      p.style.width = `${55 + Math.random() * 70}px`;
+      p.style.height = "1.5px";
+      p.style.background =
+        "linear-gradient(to right, rgba(0,255,255,0), rgba(111,219,255,0.7), rgba(0,180,255,0.12))";
+      p.style.filter = "blur(1px)";
+      p.style.animationDuration = `${dur}s`;
+      p.style.animationDelay = `${Math.random() * 0.4}s`;
+      p.style.animationIterationCount = "1";
+      p.style.animationFillMode = "forwards";
+      container.appendChild(p);
+      setTimeout(() => p.remove(), (dur + 0.5) * 1000);
+    };
+
+    const id = setInterval(spawn, 320);
+    return () => clearInterval(id);
+  }, []);
+
   return (
-    <section id="top" className="relative overflow-hidden">
-      <div className="absolute inset-0 bg-grid pointer-events-none" />
-      <div className="absolute -top-40 left-1/2 -translate-x-1/2 h-[520px] w-[900px] rounded-full blur-3xl opacity-40"
-        style={{ background: "radial-gradient(closest-side, #2F6BFF, transparent)" }} />
-      <div className="relative mx-auto max-w-7xl px-6 lg:px-10 pt-20 pb-28 grid lg:grid-cols-[1.05fr_1fr] gap-14 items-center">
-        <div>
-          <span className="chip">Rewolucja w zarządzaniu transportem</span>
-          <h1 className="mt-6 text-5xl lg:text-[68px] font-bold leading-[1.02] tracking-tight">
+    <section id="top" className="relative overflow-hidden min-h-[680px] lg:min-h-[780px]">
+
+      {/* ── BACKGROUND SCENE ── */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 animate-camera-float">
+
+          {/* unified background — single image, no clip seam */}
+          <img
+            src={truckBg}
+            alt=""
+            aria-hidden="true"
+            className="absolute inset-0 w-full h-full object-cover"
+            style={{
+              objectPosition: "52% 50%",
+              maskImage: "linear-gradient(to top, black 0%, black 62%, transparent 100%)",
+              WebkitMaskImage: "linear-gradient(to top, black 0%, black 62%, transparent 100%)",
+            }}
+          />
+
+          {/* road glow — full-width continuity under streaks */}
+          <div
+            className="absolute inset-x-0 bottom-[10%] h-[28%] pointer-events-none"
+            style={{
+              background:
+                "linear-gradient(to top, rgba(0,100,220,0.14) 0%, rgba(0,150,255,0.06) 40%, transparent 100%)",
+              maskImage: "linear-gradient(to top, black 0%, transparent 100%)",
+              WebkitMaskImage: "linear-gradient(to top, black 0%, transparent 100%)",
+            }}
+          />
+
+          {/* cyan glow — full width, soft */}
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              background:
+                "radial-gradient(ellipse 90% 60% at 65% 55%, rgba(0,150,255,0.16), transparent 70%)",
+            }}
+          />
+
+          {/* text scrim — radial fade, no hard vertical cut */}
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              background:
+                "radial-gradient(ellipse 85% 110% at 20% 48%, rgba(5,8,22,0.88) 0%, rgba(5,8,22,0.45) 42%, rgba(5,8,22,0.08) 62%, transparent 78%)",
+            }}
+          />
+
+          {/* moving grid — full width, fades out at top edge */}
+          <div
+            className="absolute bottom-0 left-0 h-[42%] animate-grid-move opacity-[0.32] pointer-events-none"
+            style={{
+              width: "200%",
+              backgroundImage:
+                "repeating-linear-gradient(to right, rgba(0,150,255,0.15) 0px, rgba(0,150,255,0.15) 2px, transparent 2px, transparent 80px)",
+              maskImage: "linear-gradient(to top, black 0%, black 35%, transparent 85%)",
+              WebkitMaskImage: "linear-gradient(to top, black 0%, black 35%, transparent 85%)",
+            }}
+          />
+
+          {/* bottom blend — soft fade into page background */}
+          <div
+            className="absolute bottom-0 left-0 right-0 h-72 pointer-events-none"
+            style={{
+              background:
+                "linear-gradient(to top, #050816 0%, rgba(5,8,22,0.95) 18%, rgba(5,8,22,0.65) 40%, rgba(5,8,22,0.25) 65%, transparent 100%)",
+            }}
+          />
+
+          {/* wheel blur — front */}
+          <div
+            className="absolute animate-blur-pulse pointer-events-none"
+            style={{
+              bottom: "19%", right: "26%",
+              width: "90px", height: "20px",
+              background: "radial-gradient(ellipse at center, rgba(0,180,255,0.75), rgba(0,180,255,0))",
+              borderRadius: "50%",
+              filter: "blur(10px)",
+            }}
+          />
+
+          {/* wheel blur — back */}
+          <div
+            className="absolute animate-blur-pulse pointer-events-none"
+            style={{
+              bottom: "19%", right: "40%",
+              width: "90px", height: "20px",
+              background: "radial-gradient(ellipse at center, rgba(0,180,255,0.75), rgba(0,180,255,0))",
+              borderRadius: "50%",
+              filter: "blur(10px)",
+            }}
+          />
+
+        </div>
+      </div>
+
+      {/* wind overlay — above scene, below text */}
+      <div className="absolute inset-0 z-[5] pointer-events-none overflow-hidden">
+        <div className="absolute inset-0">
+          {SPEED_LINES.map((l, i) => (
+            <span
+              key={i}
+              className="absolute rounded-full animate-speed-line"
+              style={{
+                top: `${l.top}%`,
+                left: `${l.left}%`,
+                width: `${l.width}%`,
+                height: "1.5px",
+                background:
+                  "linear-gradient(to right, rgba(0,255,255,0), rgba(111,219,255,0.65), rgba(0,170,255,0.1))",
+                filter: "blur(1px)",
+                opacity: l.opacity,
+                animationDuration: `${l.dur}s`,
+                animationDelay: `${l.delay}s`,
+              }}
+            />
+          ))}
+        </div>
+        <div ref={particlesRef} className="absolute inset-0" />
+      </div>
+
+      {/* ── CONTENT ── */}
+      <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-10 pt-20 pb-32">
+        <div className="max-w-xl lg:max-w-2xl">
+          <h1 className="text-5xl lg:text-[68px] font-bold leading-[1.02] tracking-tight">
             Wycena tras.{" "}
             <span className="text-gradient-cyan">Informacje real-time</span> o punktach logistycznych.
           </h1>
-          <p className="mt-6 text-lg text-[color:var(--muted-foreground)] max-w-xl leading-relaxed">
-            Kalkulator kosztów i informacje z terenu od społeczności kierowców —
-            wszystko w jednym miejscu, zanim wyślesz auto w trasę.
+          <p className="mt-6 text-lg text-[color:oklch(0.78_0.04_255)] max-w-xl leading-relaxed">
+            kalkulator kosztów oraz informacje z terenu od społeczności kierowców - wszystko w jednym miejscu, zanim wyślesz auto w trasę.
           </p>
 
           <form
@@ -94,24 +254,8 @@ function Hero() {
             Nie pozwól konkurencji podejmować bardziej świadomych decyzji od Ciebie.
           </p>
         </div>
-
-        <div className="relative lg:-mr-16 xl:-mr-24 lg:scale-110 xl:scale-125 origin-left">
-          <div className="absolute -inset-10 blur-3xl opacity-60 pointer-events-none"
-            style={{ background: "radial-gradient(closest-side, rgba(24,200,255,0.35), transparent 70%)" }} />
-          <img
-            src={truck}
-            alt="Fuvaro — inteligentny transport"
-            className="relative w-full h-auto object-cover"
-            style={{
-              maskImage:
-                "radial-gradient(ellipse 75% 70% at 50% 50%, black 55%, transparent 100%)",
-              WebkitMaskImage:
-                "radial-gradient(ellipse 75% 70% at 50% 50%, black 55%, transparent 100%)",
-            }}
-          />
-        </div>
-
       </div>
+
     </section>
   );
 }
@@ -138,9 +282,8 @@ function Product() {
   return (
     <section id="produkt" className="relative py-28">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
-        <div className="max-w-2xl">
-          <span className="chip">Produkt</span>
-          <h2 className="mt-5 text-4xl lg:text-5xl font-bold leading-tight">
+        <div className="max-w-2xl mx-auto text-center">
+          <h2 className="text-4xl lg:text-5xl font-bold leading-tight">
             Dwa filary, które zmieniają sposób{" "}
             <span className="text-gradient-cyan">zarządzania transportem</span>.
           </h2>
@@ -156,15 +299,40 @@ function Product() {
                   isWide ? "lg:grid-cols-12" : "lg:grid-cols-2"
                 } ${it.reverse ? "lg:[&>*:first-child]:order-2" : ""}`}
               >
-                <div className={`relative ${isWide ? "lg:col-span-8" : ""}`}>
-                  <div
-                    className="absolute -inset-6 rounded-3xl blur-3xl opacity-60"
-                    style={{
-                      background:
-                        "radial-gradient(closest-side, rgba(24,200,255,0.35), transparent 70%)",
-                    }}
-                  />
-                  <div className="relative rounded-3xl overflow-hidden">
+                <div className={`relative overflow-visible ${isWide ? "lg:col-span-8" : ""}`}>
+                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-visible">
+                    <div
+                      className="absolute rounded-full"
+                      style={{
+                        width: isWide ? "145%" : "115%",
+                        height: isWide ? "110%" : "140%",
+                        background:
+                          "radial-gradient(circle, rgba(26,107,170,0.75) 0%, rgba(15,61,110,0.42) 32%, rgba(47,107,255,0.14) 58%, transparent 74%)",
+                        filter: "blur(52px)",
+                      }}
+                    />
+                    <div
+                      className="absolute rounded-full"
+                      style={{
+                        width: isWide ? "105%" : "90%",
+                        height: isWide ? "95%" : "110%",
+                        background:
+                          "radial-gradient(circle, rgba(24,200,255,0.38) 0%, rgba(47,107,255,0.2) 48%, transparent 70%)",
+                        filter: "blur(36px)",
+                      }}
+                    />
+                    <div
+                      className="absolute rounded-full"
+                      style={{
+                        width: isWide ? "72%" : "62%",
+                        height: isWide ? "68%" : "78%",
+                        background:
+                          "radial-gradient(circle, rgba(111,219,255,0.52) 0%, rgba(24,200,255,0.26) 52%, transparent 74%)",
+                        filter: "blur(22px)",
+                      }}
+                    />
+                  </div>
+                  <div className="relative p-8 lg:p-12">
                     <img src={it.img} alt={it.alt} className="w-full h-auto object-contain" />
                   </div>
                 </div>
@@ -202,29 +370,26 @@ function HowItWorks() {
     {
       icon: Compass,
       title: "Podejmij lepszą decyzję przed wyjazdem",
-      desc: "Zaakceptuj, odrzuć lub renegocjuj trasę z pełnymi danymi — nie na ślepo.",
+      desc: "Zaakceptuj, odrzuć lub renegocjuj trasę z pełnymi danymi.",
     },
   ];
   return (
     <section id="jak-to-dziala" className="relative py-28">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
-        <div className="flex items-end justify-between flex-wrap gap-6">
-          <div className="max-w-2xl">
-            <span className="chip">Workflow</span>
-            <h2 className="mt-5 text-4xl lg:text-5xl font-bold leading-tight">
-              Jak to działa
-            </h2>
-            <p className="mt-4 text-[color:var(--muted-foreground)]">
-              Trzy kroki dzielą Cię od świadomych decyzji transportowych.
-            </p>
-          </div>
+        <div className="max-w-2xl mx-auto text-center">
+          <h2 className="text-4xl lg:text-5xl font-bold leading-tight">
+            Jak to działa
+          </h2>
+          <p className="mt-4 text-[color:var(--muted-foreground)]">
+            Trzy kroki dzielą Cię od świadomych decyzji transportowych.
+          </p>
         </div>
 
         <div className="mt-14 relative">
           <div className="hidden md:block absolute left-0 right-0 top-12 h-px section-divider" />
           <div className="grid md:grid-cols-3 gap-6">
             {steps.map((s, i) => (
-              <div key={s.title} className="relative rounded-3xl glass p-8">
+              <div key={s.title} className="relative rounded-3xl glass p-8 card-hover-scale">
                 <div className="flex items-center justify-between">
                   <div className="inline-flex items-center justify-center h-12 w-12 rounded-2xl bg-[#0B1730] border border-[rgba(24,200,255,0.3)] glow-cyan">
                     <s.icon className="h-5 w-5 text-[color:var(--electric)]" />
@@ -252,32 +417,58 @@ function Pricing() {
       name: "Solo",
       price: "59",
       desc: "Dla kierowców i mikrofirm transportowych.",
-      features: ["Pełny dostęp do funkcji", "Społeczność kierowców", "Kalkulator kosztów tras", "Powiadomienia real-time"],
+      features: ["Mapa z ocenami punktów logistycznymi", "Osobne pokoje z czatem na żywo dla każdego punktu", "Kalkulator kosztów tras"],
       featured: false,
     },
     {
       name: "Firma",
       price: "159",
       desc: "Dla firm transportowych z flotą i zespołem.",
-      features: ["Wszystko z planu Solo", "Zarządzanie zespołem", "Wielu kierowców i pojazdów", "Raporty i analityka", "Priorytetowe wsparcie"],
+      features: ["Wszystko z planu Solo", "Narzędzia do zarządzania zespołem", "Wiele profili kierowców i pojazdów", "Raporty i analityka", "Priorytetowe wsparcie"],
       featured: true,
     },
   ];
+  const maxFeatures = Math.max(...plans.map((p) => p.features.length));
   return (
-    <section id="cennik" className="relative py-28">
-      <div className="mx-auto max-w-7xl px-6 lg:px-10">
-        <div className="max-w-2xl">
-          <span className="chip">Cennik</span>
-          <h2 className="mt-5 text-4xl lg:text-5xl font-bold leading-tight">
+    <section id="cennik" className="relative overflow-hidden pt-28 pb-32">
+      <div
+        className="absolute inset-x-0 bottom-0 z-0 pointer-events-none"
+        aria-hidden="true"
+        style={{ top: "38%", minHeight: "520px" }}
+      >
+        <img
+          src={blueBg}
+          alt=""
+          className="absolute inset-0 h-full w-full object-cover"
+          style={{ objectPosition: "center 58%" }}
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(to bottom, #050816 0%, rgba(5,8,22,0.7) 14%, rgba(5,8,22,0.15) 38%, transparent 52%)",
+          }}
+        />
+        <div
+          className="absolute inset-x-0 bottom-0 h-32"
+          style={{
+            background: "linear-gradient(to top, #050816 0%, transparent 100%)",
+          }}
+        />
+      </div>
+
+      <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-10">
+        <div className="max-w-2xl mx-auto text-center">
+          <h2 className="text-4xl lg:text-5xl font-bold leading-tight">
             Prosty cennik. <span className="text-gradient-cyan">Bez ukrytych kosztów.</span>
           </h2>
         </div>
 
-        <div className="mt-14 grid lg:grid-cols-2 gap-6 max-w-5xl">
+        <div className="mt-14 grid lg:grid-cols-2 gap-6 max-w-5xl mx-auto">
           {plans.map((p) => (
             <div
               key={p.name}
-              className={`relative rounded-3xl p-8 lg:p-10 overflow-hidden ${
+              className={`relative rounded-3xl p-8 lg:p-10 overflow-hidden card-hover-scale ${
                 p.featured ? "glass glow-cyan" : "glass"
               }`}
             >
@@ -303,6 +494,14 @@ function Pricing() {
                       <span>{f}</span>
                     </li>
                   ))}
+                  {Array.from({ length: maxFeatures - p.features.length }).map((_, i) => (
+                    <li key={`spacer-${i}`} className="invisible pointer-events-none" aria-hidden="true">
+                      <div className="flex items-start gap-3 text-sm">
+                        <CheckCircle2 className="h-5 w-5 shrink-0 mt-0.5" />
+                        <span>placeholder</span>
+                      </div>
+                    </li>
+                  ))}
                 </ul>
 
                 <a
@@ -310,7 +509,7 @@ function Pricing() {
                   className={`mt-10 inline-flex w-full items-center justify-center gap-2 rounded-full py-3.5 text-sm font-medium transition ${
                     p.featured
                       ? "btn-primary"
-                      : "border border-[rgba(24,200,255,0.35)] text-foreground hover:bg-[rgba(24,200,255,0.08)]"
+                      : "btn-waitlist-outline border border-[rgba(255,159,28,0.45)] text-foreground hover:bg-[rgba(255,159,28,0.12)]"
                   }`}
                 >
                   Dołącz do waitlisty
@@ -338,8 +537,7 @@ function FAQ() {
     <section id="faq" className="relative py-28">
       <div className="mx-auto max-w-4xl px-6 lg:px-10">
         <div className="text-center">
-          <span className="chip">FAQ</span>
-          <h2 className="mt-5 text-4xl lg:text-5xl font-bold leading-tight">
+          <h2 className="text-4xl lg:text-5xl font-bold leading-tight">
             Najczęstsze pytania
           </h2>
         </div>
@@ -352,16 +550,30 @@ function FAQ() {
               >
                 <span className="font-medium">{it.q}</span>
                 <ChevronDown
-                  className={`h-5 w-5 text-[color:var(--electric)] transition-transform ${
-                    open === i ? "rotate-180" : ""
-                  }`}
+                  className="h-5 w-5 text-[color:var(--electric)] transition-transform duration-300"
+                  style={{ transform: open === i ? "rotate(180deg)" : "rotate(0deg)" }}
                 />
               </button>
-              {open === i && (
-                <div className="px-6 pb-5 -mt-1 text-sm text-[color:var(--muted-foreground)] leading-relaxed">
-                  {it.a}
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateRows: open === i ? "1fr" : "0fr",
+                  transition: "grid-template-rows 0.32s cubic-bezier(0.4,0,0.2,1)",
+                }}
+              >
+                <div style={{ overflow: "hidden" }}>
+                  <div
+                    className="px-6 pb-5 text-sm text-[color:var(--muted-foreground)] leading-relaxed"
+                    style={{
+                      opacity: open === i ? 1 : 0,
+                      transform: open === i ? "translateY(0)" : "translateY(-6px)",
+                      transition: "opacity 0.28s ease, transform 0.28s ease",
+                    }}
+                  >
+                    {it.a}
+                  </div>
                 </div>
-              )}
+              </div>
             </div>
           ))}
         </div>
@@ -372,47 +584,79 @@ function FAQ() {
 
 function FinalCTA() {
   return (
-    <section id="waitlist" className="relative py-28">
-      <div className="mx-auto max-w-6xl px-6 lg:px-10">
-        <div className="relative rounded-[2rem] overflow-hidden border border-[rgba(24,200,255,0.28)] p-12 lg:p-20 text-center"
-          style={{
-            background:
-              "radial-gradient(ellipse 80% 100% at 50% 0%, rgba(47,107,255,0.35), transparent 60%), linear-gradient(180deg, #081328, #050816)",
-          }}
-        >
-          <div className="absolute inset-0 bg-grid opacity-50 pointer-events-none" />
-          <div className="absolute -top-20 left-1/2 -translate-x-1/2 h-72 w-[700px] rounded-full blur-3xl opacity-50"
-            style={{ background: "radial-gradient(closest-side, #18C8FF, transparent)" }} />
+    <section id="waitlist" className="relative py-28 overflow-visible">
+      <div className="mx-auto max-w-6xl px-6 lg:px-10 overflow-visible">
+        <div className="relative rounded-[2rem] overflow-hidden border border-[rgba(24,200,255,0.28)] px-6 py-12 lg:px-10 lg:py-16 text-center min-h-[520px] lg:min-h-[580px] waitlist-hover-scale">
+          <img
+            src={truckWaitlist}
+            alt=""
+            aria-hidden="true"
+            className="absolute inset-0 h-full w-full object-cover scale-x-[-1] pointer-events-none"
+            style={{ objectPosition: "center center" }}
+          />
 
-          <div className="relative">
-            <span className="chip">Waitlista otwarta</span>
-            <h2 className="mt-6 text-4xl lg:text-6xl font-bold leading-tight tracking-tight">
-              Dołącz do waitlisty <span className="text-gradient-cyan">Fuvaro</span>
-            </h2>
-            <p className="mt-5 text-[color:var(--muted-foreground)] max-w-xl mx-auto">
-              Bądź wśród pierwszych, którzy zmienią sposób zarządzania transportem.
-            </p>
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              background:
+                "radial-gradient(ellipse 90% 80% at 50% 55%, rgba(0,150,255,0.18), transparent 70%)",
+            }}
+          />
 
-            <form
-              onSubmit={(e) => e.preventDefault()}
-              className="mt-10 flex flex-col sm:flex-row gap-3 max-w-lg mx-auto"
-            >
-              <input
-                type="email"
-                required
-                placeholder="twoj@email.pl"
-                className="flex-1 rounded-full bg-[#0B1730]/80 border border-[rgba(24,200,255,0.22)] px-5 py-3.5 text-sm text-foreground placeholder:text-[color:var(--muted-foreground)] focus:outline-none focus:border-[color:var(--electric)] focus:ring-2 focus:ring-[color:var(--ring)] transition"
-              />
-              <button
-                type="submit"
-                className="btn-primary inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 text-sm whitespace-nowrap"
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              background:
+                "linear-gradient(to right, transparent 0%, transparent 48%, rgba(5,8,22,0.35) 68%, rgba(5,8,22,0.55) 100%)",
+            }}
+          />
+
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              background:
+                "linear-gradient(to bottom, rgba(5,8,22,0.5) 0%, transparent 22%, transparent 78%, rgba(5,8,22,0.6) 100%)",
+            }}
+          />
+
+          <div className="absolute inset-0 bg-grid opacity-15 pointer-events-none" />
+
+          <div className="relative z-10 flex flex-col h-full min-h-[440px] lg:min-h-[500px]">
+            <div className="text-center">
+              <h2 className="text-4xl lg:text-6xl font-bold leading-tight tracking-tight">
+                Nie czekaj, aż okazja <span className="text-gradient-cyan">odjedzie</span>
+              </h2>
+              <p className="mt-4 text-lg lg:text-xl text-[color:var(--muted-foreground)]">
+                Dołącz do waitlisty Fuvaro
+              </p>
+            </div>
+
+            <div className="mt-6 lg:mt-0 lg:absolute lg:left-[12.5%] lg:top-[34%] lg:w-[42%] lg:h-[32%] flex flex-col justify-center text-center lg:text-left px-1">
+              <p className="text-sm lg:text-[15px] text-[color:var(--muted-foreground)] leading-relaxed max-w-md mx-auto lg:mx-0">
+                Bądź wśród pierwszych, którzy zmienią sposób zarządzania transportem.
+              </p>
+
+              <form
+                onSubmit={(e) => e.preventDefault()}
+                className="mt-4 lg:mt-5 flex flex-col lg:flex-row lg:items-center gap-2 max-w-xs mx-auto lg:mx-0 lg:max-w-[92%]"
               >
-                Dołącz do waitlisty
-                <ArrowRight className="h-4 w-4" />
-              </button>
-            </form>
+                <input
+                  type="email"
+                  required
+                  placeholder="twoj@email.pl"
+                  className="w-full lg:flex-1 lg:min-w-0 rounded-full bg-[#0B1730]/85 border border-[rgba(24,200,255,0.22)] px-4 py-2.5 text-sm text-foreground placeholder:text-[color:var(--muted-foreground)] focus:outline-none focus:border-[color:var(--electric)] focus:ring-2 focus:ring-[color:var(--ring)] transition"
+                />
+                <button
+                  type="submit"
+                  className="btn-primary inline-flex w-full lg:w-auto shrink-0 items-center justify-center gap-1.5 rounded-full px-3.5 py-2.5 text-xs whitespace-nowrap"
+                >
+                  Dołącz do waitlisty
+                  <ArrowRight className="h-3.5 w-3.5" />
+                </button>
+              </form>
+            </div>
 
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm text-[color:var(--muted-foreground)]">
+            <div className="mt-auto pt-8 lg:pt-0 lg:absolute lg:bottom-6 lg:left-0 lg:right-0 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm text-[color:var(--muted-foreground)]">
               <span className="inline-flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-[color:var(--electric)]" />Bez zobowiązań</span>
               <span className="inline-flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-[color:var(--electric)]" />Wczesny dostęp</span>
               <span className="inline-flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-[color:var(--electric)]" />Zniżka dla pierwszych</span>
