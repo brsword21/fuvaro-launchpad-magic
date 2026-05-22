@@ -11,7 +11,6 @@ import {
 } from "lucide-react";
 import logo from "@/assets/fuvaro-logo.png";
 import truck from "@/assets/fuvaro-truck.png";
-import truckLoop from "@/assets/fuvaro-truck-loop.mp4";
 import appMobile from "@/assets/fuvaro-app-mobile.png";
 import appDesktop from "@/assets/fuvaro-app-desktop.png";
 
@@ -101,16 +100,6 @@ function Hero() {
             style={{ background: "radial-gradient(closest-side, rgba(24,200,255,0.35), transparent 70%)" }} />
           <div className="relative rounded-3xl overflow-hidden border border-[rgba(24,200,255,0.22)] glass">
             <img src={truck} alt="Fuvaro — inteligentny transport" className="w-full h-auto object-cover" />
-            <video
-              src={truckLoop}
-              autoPlay
-              loop
-              muted
-              playsInline
-              aria-hidden
-              className="absolute inset-0 w-full h-full object-cover pointer-events-none"
-              style={{ mixBlendMode: "screen" }}
-            />
             <div className="absolute inset-0 bg-gradient-to-tr from-[#050816]/60 via-transparent to-transparent" />
             <div className="absolute bottom-5 left-5 right-5 flex items-center justify-between">
               <div className="glass rounded-2xl px-4 py-3 flex items-center gap-3">
