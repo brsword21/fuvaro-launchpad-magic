@@ -101,33 +101,37 @@ function Hero() {
           <div className="relative">
             <div className="relative animate-truck-float">
               <img src={truck} alt="Fuvaro — inteligentny transport" className="w-full h-auto object-contain" />
-              {/* Animated neon wheels overlay */}
+              {/* Invisible overlays on existing truck wheels — rotate only a subtle highlight */}
               {[
-                { left: "44.5%", top: "76%", size: "10%" },
-                { left: "55.5%", top: "76%", size: "10%" },
-                { left: "72%", top: "76.5%", size: "9%" },
-                { left: "85%", top: "76.5%", size: "9%" },
+                { left: "61.4%", top: "68.7%", size: "7.8%" },
+                { left: "75.9%", top: "68.7%", size: "5.7%" },
+                { left: "86.2%", top: "69.2%", size: "3.6%" },
+                { left: "90.4%", top: "69.2%", size: "3.6%" },
+                { left: "94.5%", top: "69.2%", size: "3.6%" },
               ].map((w, i) => (
                 <div
                   key={i}
-                  className="absolute -translate-x-1/2 -translate-y-1/2 aspect-square animate-wheel-spin"
+                  className="absolute -translate-x-1/2 -translate-y-1/2 aspect-square pointer-events-none"
                   style={{ left: w.left, top: w.top, width: w.size }}
                 >
+                  <div className="absolute inset-0 rounded-full animate-wheel-spin">
+                    {/* subtle rotating highlight arc */}
+                    <div
+                      className="absolute inset-0 rounded-full"
+                      style={{
+                        background:
+                          "conic-gradient(from 0deg, transparent 0deg, rgba(111,219,255,0.55) 25deg, transparent 60deg, transparent 180deg, rgba(24,200,255,0.35) 210deg, transparent 240deg)",
+                        mixBlendMode: "screen",
+                      }}
+                    />
+                  </div>
+                  {/* static soft glow */}
                   <div
-                    className="w-full h-full rounded-full"
+                    className="absolute inset-[-8%] rounded-full pointer-events-none"
                     style={{
-                      background:
-                        "radial-gradient(circle at 50% 50%, #050816 18%, #0a1f4a 28%, #18C8FF 42%, #2F6BFF 60%, #050816 75%)",
-                      boxShadow:
-                        "0 0 12px rgba(24,200,255,0.9), 0 0 28px rgba(47,107,255,0.6), inset 0 0 10px rgba(24,200,255,0.7)",
+                      boxShadow: "0 0 10px rgba(24,200,255,0.45), 0 0 20px rgba(47,107,255,0.25)",
                     }}
                   />
-                  {/* spokes */}
-                  <div className="absolute inset-[30%] rounded-full border border-[rgba(111,219,255,0.6)]" />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-[2px] h-full bg-[rgba(111,219,255,0.5)]" />
-                    <div className="absolute w-full h-[2px] bg-[rgba(111,219,255,0.5)]" />
-                  </div>
                 </div>
               ))}
             </div>
