@@ -450,9 +450,9 @@ function Landing() {
       <Navbar />
       <main>
         <Hero />
-        <Benefits />
+        <Product />
         <HowItWorks />
-        <Showcase />
+
         <Pricing />
         <FAQ />
         <FinalCTA />
