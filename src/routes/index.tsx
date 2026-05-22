@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import logo from "@/assets/fuvaro-logo.png";
 import truck from "@/assets/fuvaro-truck.png";
+import truckLoop from "@/assets/fuvaro-truck-loop.mp4";
 import appMobile from "@/assets/fuvaro-app-mobile.png";
 import appDesktop from "@/assets/fuvaro-app-desktop.png";
 
