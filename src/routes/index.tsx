@@ -95,27 +95,22 @@ function Hero() {
           </p>
         </div>
 
-        <div className="relative">
-          <div className="absolute -inset-6 rounded-3xl blur-3xl opacity-60"
+        <div className="relative lg:-mr-16 xl:-mr-24 lg:scale-110 xl:scale-125 origin-left">
+          <div className="absolute -inset-10 blur-3xl opacity-60 pointer-events-none"
             style={{ background: "radial-gradient(closest-side, rgba(24,200,255,0.35), transparent 70%)" }} />
-          <div className="relative rounded-3xl overflow-hidden border border-[rgba(24,200,255,0.22)] glass">
-            <img src={truck} alt="Fuvaro — inteligentny transport" className="w-full h-auto object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-tr from-[#050816]/60 via-transparent to-transparent" />
-            <div className="absolute bottom-5 left-5 right-5 flex items-center justify-between">
-              <div className="glass rounded-2xl px-4 py-3 flex items-center gap-3">
-                <div className="h-2 w-2 rounded-full bg-[#18C8FF] shadow-[0_0_12px_#18C8FF] animate-pulse" />
-                <div className="text-xs">
-                  <div className="text-foreground font-medium">Live · 142 kierowców</div>
-                  <div className="text-[color:var(--muted-foreground)]">Trasa PL → DE · aktualizacja 12s temu</div>
-                </div>
-              </div>
-              <div className="glass rounded-2xl px-4 py-3 hidden sm:block">
-                <div className="text-[10px] uppercase tracking-widest text-[color:var(--muted-foreground)]">Marża</div>
-                <div className="text-lg font-semibold text-gradient-cyan">+18,4%</div>
-              </div>
-            </div>
-          </div>
+          <img
+            src={truck}
+            alt="Fuvaro — inteligentny transport"
+            className="relative w-full h-auto object-cover"
+            style={{
+              maskImage:
+                "radial-gradient(ellipse 75% 70% at 50% 50%, black 55%, transparent 100%)",
+              WebkitMaskImage:
+                "radial-gradient(ellipse 75% 70% at 50% 50%, black 55%, transparent 100%)",
+            }}
+          />
         </div>
+
       </div>
     </section>
   );
