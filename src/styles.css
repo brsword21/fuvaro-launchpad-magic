@@ -227,6 +227,70 @@
     position: absolute;
     animation: wind linear forwards;
   }
+
+  /* Product device glow — soft edge blend on mobile/tablet */
+  @media (max-width: 1023px) {
+    .product-glow-stack {
+      -webkit-mask-image: radial-gradient(
+        ellipse 95% 82% at 50% 50%,
+        #000 18%,
+        rgba(0, 0, 0, 0.6) 42%,
+        transparent 76%
+      );
+      mask-image: radial-gradient(
+        ellipse 95% 82% at 50% 50%,
+        #000 18%,
+        rgba(0, 0, 0, 0.6) 42%,
+        transparent 76%
+      );
+    }
+
+    .product-glow-outer,
+    .product-glow-mid,
+    .product-glow-inner {
+      width: 92% !important;
+      height: 92% !important;
+    }
+
+    .product-glow-outer {
+      background: radial-gradient(
+        circle,
+        rgba(26, 107, 170, 0.32) 0%,
+        rgba(15, 61, 110, 0.14) 38%,
+        rgba(47, 107, 255, 0.04) 62%,
+        transparent 88%
+      ) !important;
+      filter: blur(64px) !important;
+    }
+
+    .product-glow-mid {
+      background: radial-gradient(
+        circle,
+        rgba(24, 200, 255, 0.2) 0%,
+        rgba(47, 107, 255, 0.08) 48%,
+        transparent 84%
+      ) !important;
+      filter: blur(48px) !important;
+    }
+
+    .product-glow-inner {
+      background: radial-gradient(
+        circle,
+        rgba(111, 219, 255, 0.24) 0%,
+        rgba(24, 200, 255, 0.1) 52%,
+        transparent 86%
+      ) !important;
+      filter: blur(32px) !important;
+    }
+
+    .product-glow-feather {
+      background:
+        linear-gradient(to bottom, #050816 0%, transparent 20%),
+        linear-gradient(to top, #050816 0%, transparent 20%),
+        linear-gradient(to right, #050816 0%, transparent 16%),
+        linear-gradient(to left, #050816 0%, transparent 16%);
+    }
+  }
 }
 
 @keyframes cameraFloat {

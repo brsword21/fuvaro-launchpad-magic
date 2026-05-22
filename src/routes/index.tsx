@@ -49,7 +49,7 @@ function Navbar() {
         <div className="flex items-center gap-3">
           <a
             href="#waitlist"
-            className="btn-primary inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm"
+            className="btn-primary hidden md:inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm"
           >
             Dołącz do waitlisty
             <ArrowRight className="h-4 w-4" />
@@ -333,10 +333,10 @@ function Product() {
                   isWide ? "lg:grid-cols-12" : "lg:grid-cols-2"
                 } ${it.reverse ? "lg:[&>*:first-child]:order-2" : ""}`}
               >
-                <div className={`relative overflow-hidden lg:overflow-visible ${isWide ? "lg:col-span-8" : ""}`}>
-                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-visible">
+                <div className={`relative overflow-visible ${isWide ? "lg:col-span-8" : ""}`}>
+                  <div className="product-glow-stack absolute inset-0 flex items-center justify-center pointer-events-none overflow-visible">
                     <div
-                      className="absolute rounded-full"
+                      className="product-glow-outer absolute rounded-full"
                       style={{
                         width: isWide ? "145%" : "115%",
                         height: isWide ? "110%" : "140%",
@@ -346,7 +346,7 @@ function Product() {
                       }}
                     />
                     <div
-                      className="absolute rounded-full"
+                      className="product-glow-mid absolute rounded-full"
                       style={{
                         width: isWide ? "105%" : "90%",
                         height: isWide ? "95%" : "110%",
@@ -356,7 +356,7 @@ function Product() {
                       }}
                     />
                     <div
-                      className="absolute rounded-full"
+                      className="product-glow-inner absolute rounded-full"
                       style={{
                         width: isWide ? "72%" : "62%",
                         height: isWide ? "68%" : "78%",
@@ -366,8 +366,13 @@ function Product() {
                       }}
                     />
                   </div>
-                  <div className="relative p-8 lg:p-12">
-                    <img src={it.img} alt={it.alt} className="w-full h-auto object-contain" />
+                  <div className="product-glow-feather absolute inset-0 pointer-events-none z-[1] lg:hidden" />
+                  <div className="relative z-[2] p-8 lg:p-12">
+                    <img
+                      src={it.img}
+                      alt={it.alt}
+                      className={`w-full h-auto object-contain${isWide ? " max-lg:scale-[1.08] max-lg:origin-center" : ""}`}
+                    />
                   </div>
                 </div>
                 <div className={isWide ? "lg:col-span-4" : ""}>
