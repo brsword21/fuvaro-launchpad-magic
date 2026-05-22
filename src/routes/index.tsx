@@ -121,19 +121,23 @@ function Hero() {
   );
 }
 
-function Benefits() {
-  const cards = [
+function Product() {
+  const items = [
     {
-      icon: Calculator,
-      title: "Kalkulator kosztów tras",
-      desc: "Policz paliwo, opłaty drogowe, ZUS kierowcy i marżę w kilka sekund. Wiedz, czy trasa się opłaca, zanim klikniesz „przyjmuję”.",
-      tag: "Profitability engine",
-    },
-    {
-      icon: Radio,
+      tag: "Real-time intel",
       title: "Sprawdzone informacje o punktach logistycznych",
       desc: "Czasy rozładunku, kolejki, parkingi, kontrole. Dane potwierdzane na żywo przez społeczność kierowców na trasie.",
-      tag: "Real-time intel",
+      img: appMobile,
+      alt: "Fuvaro — aplikacja mobilna dla kierowców",
+      reverse: false,
+    },
+    {
+      tag: "Profitability engine",
+      title: "Kalkulator kosztów tras",
+      desc: "Policz paliwo, opłaty drogowe, ZUS kierowcy i marżę w kilka sekund. Wiedz, czy trasa się opłaca, zanim klikniesz „przyjmuję”.",
+      img: appDesktop,
+      alt: "Fuvaro — kalkulator kosztów trasy dla spedytora",
+      reverse: true,
     },
   ];
   return (
@@ -146,48 +150,48 @@ function Benefits() {
             <span className="text-gradient-cyan">zarządzania transportem</span>.
           </h2>
         </div>
-        <div className="mt-14 grid md:grid-cols-2 gap-6">
-          {cards.map((c) => (
-            <div key={c.title} className="group relative rounded-3xl glass p-8 overflow-hidden">
-              <div className="absolute -top-24 -right-24 h-64 w-64 rounded-full blur-3xl opacity-40 group-hover:opacity-70 transition-opacity"
-                style={{ background: "radial-gradient(closest-side, #18C8FF, transparent)" }} />
-              <div className="relative">
-                <div className="inline-flex items-center justify-center h-12 w-12 rounded-2xl bg-[#0B1730] border border-[rgba(24,200,255,0.3)] glow-cyan">
-                  <c.icon className="h-5 w-5 text-[color:var(--electric)]" />
-                </div>
-                <div className="mt-6 text-[11px] uppercase tracking-[0.18em] text-[color:var(--electric)]">
-                  {c.tag}
-                </div>
-                <h3 className="mt-2 text-2xl font-semibold">{c.title}</h3>
-                <p className="mt-3 text-[color:var(--muted-foreground)] leading-relaxed">
-                  {c.desc}
-                </p>
 
-                <div className="mt-8 h-40 rounded-2xl border border-[rgba(24,200,255,0.18)] bg-[#050816]/60 relative overflow-hidden">
-                  <div className="absolute inset-0 bg-grid opacity-60" />
-                  <div className="absolute inset-x-6 bottom-6 flex items-end gap-1.5">
-                    {[28, 52, 38, 64, 80, 46, 72, 90, 58, 76, 96, 68].map((h, i) => (
-                      <div
-                        key={i}
-                        className="flex-1 rounded-sm"
-                        style={{
-                          height: `${h}%`,
-                          background: "linear-gradient(180deg, #6FDBFF, #2F6BFF)",
-                          opacity: 0.3 + (i / 12) * 0.7,
-                        }}
-                      />
-                    ))}
+        <div className="mt-16 space-y-24">
+          {items.map((it) => {
+            const isWide = it.img === appDesktop;
+            return (
+              <div
+                key={it.title}
+                className={`grid gap-10 items-center ${
+                  isWide ? "lg:grid-cols-12" : "lg:grid-cols-2"
+                } ${it.reverse ? "lg:[&>*:first-child]:order-2" : ""}`}
+              >
+                <div className={`relative ${isWide ? "lg:col-span-8" : ""}`}>
+                  <div
+                    className="absolute -inset-6 rounded-3xl blur-3xl opacity-60"
+                    style={{
+                      background:
+                        "radial-gradient(closest-side, rgba(24,200,255,0.35), transparent 70%)",
+                    }}
+                  />
+                  <div className="relative rounded-3xl overflow-hidden">
+                    <img src={it.img} alt={it.alt} className="w-full h-auto object-contain" />
                   </div>
                 </div>
+                <div className={isWide ? "lg:col-span-4" : ""}>
+                  <div className="text-[11px] uppercase tracking-[0.18em] text-[color:var(--electric)]">
+                    {it.tag}
+                  </div>
+                  <h3 className="mt-3 text-3xl lg:text-4xl font-semibold leading-tight">
+                    {it.title}
+                  </h3>
+                  <p className="mt-4 text-[color:var(--muted-foreground)] leading-relaxed">
+                    {it.desc}
+                  </p>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
   );
 }
-
 function HowItWorks() {
   const steps = [
     {
@@ -246,85 +250,6 @@ function HowItWorks() {
     </section>
   );
 }
-function Showcase() {
-  const items = [
-    {
-      tag: "Aplikacja mobilna dla kierowców",
-      title: "Społeczność kierowców w terenie",
-      desc: "Kierowcy oceniają punkty logistyczne, dzielą się czasem oczekiwania i sytuacją na miejscu — w czasie rzeczywistym.",
-      img: appMobile,
-      alt: "Fuvaro — aplikacja mobilna dla kierowców",
-      reverse: false,
-    },
-    {
-      tag: "Panel dla spedytora",
-      title: "Kalkulator kosztów trasy",
-      desc: "Pełna kalkulacja paliwa, opłat, czasu kierowcy i marży — z mapą trasy i danymi z miejsc na żywo.",
-      img: appDesktop,
-      alt: "Fuvaro — kalkulator kosztów trasy dla spedytora",
-      reverse: true,
-    },
-  ];
-  return (
-    <section id="aplikacja" className="relative py-28">
-      <div className="mx-auto max-w-7xl px-6 lg:px-10">
-        <div className="max-w-2xl">
-          <span className="chip">Podgląd</span>
-          <h2 className="mt-5 text-4xl lg:text-5xl font-bold leading-tight">
-            Jedno narzędzie. <span className="text-gradient-cyan">Dwie perspektywy.</span>
-          </h2>
-          <p className="mt-4 text-[color:var(--muted-foreground)]">
-            Aplikacja dla kierowców i panel dla spedytora — połączone w czasie rzeczywistym.
-          </p>
-        </div>
-
-        <div className="mt-16 space-y-24">
-          {items.map((it) => {
-            const isWide = it.img === appDesktop;
-            return (
-              <div
-                key={it.title}
-                className={`grid gap-10 items-center ${
-                  isWide
-                    ? "lg:grid-cols-12"
-                    : "lg:grid-cols-2"
-                } ${it.reverse ? "lg:[&>*:first-child]:order-2" : ""}`}
-              >
-                <div className={`relative ${isWide ? "lg:col-span-8" : ""}`}>
-                  <div
-                    className="absolute -inset-6 rounded-3xl blur-3xl opacity-60"
-                    style={{
-                      background:
-                        "radial-gradient(closest-side, rgba(24,200,255,0.35), transparent 70%)",
-                    }}
-                  />
-                  <div className="relative rounded-3xl overflow-hidden">
-                    <img src={it.img} alt={it.alt} className="w-full h-auto object-contain" />
-                  </div>
-                </div>
-                <div className={isWide ? "lg:col-span-4" : ""}>
-                  <div className="text-[11px] uppercase tracking-[0.18em] text-[color:var(--electric)]">
-                    {it.tag}
-                  </div>
-                  <h3 className="mt-3 text-3xl lg:text-4xl font-semibold leading-tight">
-                    {it.title}
-                  </h3>
-                  <p className="mt-4 text-[color:var(--muted-foreground)] leading-relaxed">
-                    {it.desc}
-                  </p>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-
-
-
 
 function Pricing() {
   const plans = [
@@ -525,9 +450,9 @@ function Landing() {
       <Navbar />
       <main>
         <Hero />
-        <Benefits />
+        <Product />
         <HowItWorks />
-        <Showcase />
+
         <Pricing />
         <FAQ />
         <FinalCTA />
