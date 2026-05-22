@@ -266,24 +266,13 @@ function Hero() {
             kalkulator kosztów oraz informacje z terenu od społeczności kierowców - wszystko w jednym miejscu, zanim wyślesz auto w trasę.
           </p>
 
-          <form
-            onSubmit={(e) => e.preventDefault()}
-            className="mt-8 flex flex-col sm:flex-row gap-3 max-w-lg"
+          <a
+            href="#waitlist"
+            className="btn-primary mt-7 lg:mt-8 inline-flex items-center justify-center gap-2 rounded-full px-7 py-2.5 text-[15px] lg:px-8 lg:text-base"
           >
-            <input
-              type="email"
-              required
-              placeholder="twoj@email.pl"
-              className="flex-1 rounded-full bg-[#0B1730]/80 border border-[rgba(24,200,255,0.22)] px-5 py-3.5 text-sm text-foreground placeholder:text-[color:var(--muted-foreground)] focus:outline-none focus:border-[color:var(--electric)] focus:ring-2 focus:ring-[color:var(--ring)] transition"
-            />
-            <button
-              type="submit"
-              className="btn-primary inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 text-sm whitespace-nowrap"
-            >
-              Dołącz do waitlisty
-              <ArrowRight className="h-4 w-4" />
-            </button>
-          </form>
+            Dołącz do waitlisty
+            <ArrowRight className="h-4 w-4 lg:h-[18px] lg:w-[18px]" />
+          </a>
           <p className="mt-4 text-xs text-[color:var(--muted-foreground)]">
             Nie pozwól konkurencji podejmować bardziej świadomych decyzji od Ciebie.
           </p>
@@ -669,41 +658,26 @@ function FinalCTA() {
           <div className="absolute inset-0 bg-grid opacity-15 pointer-events-none" />
 
           <div className="relative z-10 flex flex-col h-full min-h-[440px] lg:min-h-[500px]">
-            <div className="text-center">
+            <div className="text-center mt-4 lg:mt-8 relative z-10">
               <h2 className="text-4xl lg:text-6xl font-bold leading-tight tracking-tight">
                 Nie czekaj, aż okazja <span className="text-gradient-cyan">odjedzie</span>
               </h2>
-              <p className="mt-4 text-lg lg:text-xl text-[color:var(--muted-foreground)]">
-                Dołącz do waitlisty Fuvaro
-              </p>
             </div>
 
-            <div className="mt-6 lg:mt-0 lg:absolute lg:left-[12.5%] lg:top-[34%] lg:w-[42%] lg:h-[32%] flex flex-col justify-center text-center lg:text-left px-1">
-              <p className="text-sm lg:text-[15px] text-[color:var(--muted-foreground)] leading-relaxed max-w-md mx-auto lg:mx-0">
+            <div className="mt-6 lg:mt-0 lg:absolute lg:inset-0 flex flex-col items-center justify-center text-center px-6">
+              <p className="text-xs lg:text-[13px] text-[color:var(--muted-foreground)] leading-relaxed max-w-[15rem] lg:max-w-[20rem]">
                 Bądź wśród pierwszych, którzy zmienią sposób zarządzania transportem.
               </p>
-
-              <form
-                onSubmit={(e) => e.preventDefault()}
-                className="mt-4 lg:mt-5 flex flex-col lg:flex-row lg:items-center gap-2 max-w-xs mx-auto lg:mx-0 lg:max-w-[92%]"
+              <button
+                type="button"
+                className="btn-primary mt-4 inline-flex items-center justify-center gap-1.5 rounded-full px-5 py-2.5 text-xs lg:text-[13px]"
               >
-                <input
-                  type="email"
-                  required
-                  placeholder="twoj@email.pl"
-                  className="w-full lg:flex-1 lg:min-w-0 rounded-full bg-[#0B1730]/85 border border-[rgba(24,200,255,0.22)] px-4 py-2.5 text-sm text-foreground placeholder:text-[color:var(--muted-foreground)] focus:outline-none focus:border-[color:var(--electric)] focus:ring-2 focus:ring-[color:var(--ring)] transition"
-                />
-                <button
-                  type="submit"
-                  className="btn-primary inline-flex w-full lg:w-auto shrink-0 items-center justify-center gap-1.5 rounded-full px-3.5 py-2.5 text-xs whitespace-nowrap"
-                >
-                  Dołącz do waitlisty
-                  <ArrowRight className="h-3.5 w-3.5" />
-                </button>
-              </form>
+                Dołącz do waitlisty
+                <ArrowRight className="h-3.5 w-3.5" />
+              </button>
             </div>
 
-            <div className="mt-auto pt-8 lg:pt-0 lg:absolute lg:bottom-6 lg:left-0 lg:right-0 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm text-[color:var(--muted-foreground)]">
+            <div className="mt-auto pt-8 lg:pt-0 lg:absolute lg:bottom-6 lg:left-0 lg:right-0 z-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm text-[color:var(--muted-foreground)]">
               <span className="inline-flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-[color:var(--electric)]" />Bez zobowiązań</span>
               <span className="inline-flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-[color:var(--electric)]" />Wczesny dostęp</span>
               <span className="inline-flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-[color:var(--electric)]" />Zniżka dla pierwszych</span>
