@@ -192,11 +192,64 @@ function Product() {
     </section>
   );
 }
+function HowItWorks() {
+  const steps = [
+    {
+      icon: Calculator,
+      title: "Oblicz koszt trasy",
+      desc: "Wprowadź punkty A → B, ładunek i pojazd. Fuvaro pokazuje pełny koszt i marżę w czasie rzeczywistym.",
+    },
+    {
+      icon: MapPin,
+      title: "Sprawdź sytuację na miejscu",
+      desc: "Zobacz live raporty od kierowców: czasy rozładunku, korki, kontrole i sytuacja na punktach logistycznych.",
+    },
+    {
+      icon: Compass,
+      title: "Podejmij lepszą decyzję przed wyjazdem",
+      desc: "Zaakceptuj, odrzuć lub renegocjuj trasę z pełnymi danymi — nie na ślepo.",
+    },
+  ];
+  return (
+    <section id="jak-to-dziala" className="relative py-28">
+      <div className="mx-auto max-w-7xl px-6 lg:px-10">
+        <div className="flex items-end justify-between flex-wrap gap-6">
+          <div className="max-w-2xl">
+            <span className="chip">Workflow</span>
+            <h2 className="mt-5 text-4xl lg:text-5xl font-bold leading-tight">
+              Jak to działa
+            </h2>
+            <p className="mt-4 text-[color:var(--muted-foreground)]">
+              Trzy kroki dzielą Cię od świadomych decyzji transportowych.
+            </p>
+          </div>
+        </div>
 
-
-
-
-
+        <div className="mt-14 relative">
+          <div className="hidden md:block absolute left-0 right-0 top-12 h-px section-divider" />
+          <div className="grid md:grid-cols-3 gap-6">
+            {steps.map((s, i) => (
+              <div key={s.title} className="relative rounded-3xl glass p-8">
+                <div className="flex items-center justify-between">
+                  <div className="inline-flex items-center justify-center h-12 w-12 rounded-2xl bg-[#0B1730] border border-[rgba(24,200,255,0.3)] glow-cyan">
+                    <s.icon className="h-5 w-5 text-[color:var(--electric)]" />
+                  </div>
+                  <span className="font-display text-5xl font-bold text-transparent" style={{ WebkitTextStroke: "1px rgba(111,219,255,0.35)" }}>
+                    0{i + 1}
+                  </span>
+                </div>
+                <h3 className="mt-6 text-xl font-semibold">{s.title}</h3>
+                <p className="mt-3 text-sm text-[color:var(--muted-foreground)] leading-relaxed">
+                  {s.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
 
 function Pricing() {
   const plans = [
