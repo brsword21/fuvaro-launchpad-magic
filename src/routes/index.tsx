@@ -98,44 +98,10 @@ function Hero() {
         <div className="relative">
           <div className="absolute -inset-6 rounded-3xl blur-3xl opacity-60"
             style={{ background: "radial-gradient(closest-side, rgba(24,200,255,0.35), transparent 70%)" }} />
-          <div className="relative">
-            <div className="relative animate-truck-float">
-              <img src={truck} alt="Fuvaro — inteligentny transport" className="w-full h-auto object-contain" />
-              {/* Invisible overlays on existing truck wheels — rotate only a subtle highlight */}
-              {[
-                { left: "61.4%", top: "68.7%", size: "7.8%" },
-                { left: "75.9%", top: "68.7%", size: "5.7%" },
-                { left: "86.2%", top: "69.2%", size: "3.6%" },
-                { left: "90.4%", top: "69.2%", size: "3.6%" },
-                { left: "94.5%", top: "69.2%", size: "3.6%" },
-              ].map((w, i) => (
-                <div
-                  key={i}
-                  className="absolute -translate-x-1/2 -translate-y-1/2 aspect-square pointer-events-none"
-                  style={{ left: w.left, top: w.top, width: w.size }}
-                >
-                  <div className="absolute inset-0 rounded-full animate-wheel-spin">
-                    {/* subtle rotating highlight arc */}
-                    <div
-                      className="absolute inset-0 rounded-full"
-                      style={{
-                        background:
-                          "conic-gradient(from 0deg, transparent 0deg, rgba(111,219,255,0.55) 25deg, transparent 60deg, transparent 180deg, rgba(24,200,255,0.35) 210deg, transparent 240deg)",
-                        mixBlendMode: "screen",
-                      }}
-                    />
-                  </div>
-                  {/* static soft glow */}
-                  <div
-                    className="absolute inset-[-8%] rounded-full pointer-events-none"
-                    style={{
-                      boxShadow: "0 0 10px rgba(24,200,255,0.45), 0 0 20px rgba(47,107,255,0.25)",
-                    }}
-                  />
-                </div>
-              ))}
-            </div>
-            <div className="mt-6 flex items-center justify-between gap-3 flex-wrap">
+          <div className="relative rounded-3xl overflow-hidden border border-[rgba(24,200,255,0.22)] glass">
+            <img src={truck} alt="Fuvaro — inteligentny transport" className="w-full h-auto object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-tr from-[#050816]/60 via-transparent to-transparent" />
+            <div className="absolute bottom-5 left-5 right-5 flex items-center justify-between">
               <div className="glass rounded-2xl px-4 py-3 flex items-center gap-3">
                 <div className="h-2 w-2 rounded-full bg-[#18C8FF] shadow-[0_0_12px_#18C8FF] animate-pulse" />
                 <div className="text-xs">
