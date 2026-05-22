@@ -98,10 +98,40 @@ function Hero() {
         <div className="relative">
           <div className="absolute -inset-6 rounded-3xl blur-3xl opacity-60"
             style={{ background: "radial-gradient(closest-side, rgba(24,200,255,0.35), transparent 70%)" }} />
-          <div className="relative rounded-3xl overflow-hidden border border-[rgba(24,200,255,0.22)] glass">
-            <img src={truck} alt="Fuvaro — inteligentny transport" className="w-full h-auto object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-tr from-[#050816]/60 via-transparent to-transparent" />
-            <div className="absolute bottom-5 left-5 right-5 flex items-center justify-between">
+          <div className="relative">
+            <div className="relative animate-truck-float">
+              <img src={truck} alt="Fuvaro — inteligentny transport" className="w-full h-auto object-contain" />
+              {/* Animated neon wheels overlay */}
+              {[
+                { left: "44.5%", top: "76%", size: "10%" },
+                { left: "55.5%", top: "76%", size: "10%" },
+                { left: "72%", top: "76.5%", size: "9%" },
+                { left: "85%", top: "76.5%", size: "9%" },
+              ].map((w, i) => (
+                <div
+                  key={i}
+                  className="absolute -translate-x-1/2 -translate-y-1/2 aspect-square animate-wheel-spin"
+                  style={{ left: w.left, top: w.top, width: w.size }}
+                >
+                  <div
+                    className="w-full h-full rounded-full"
+                    style={{
+                      background:
+                        "radial-gradient(circle at 50% 50%, #050816 18%, #0a1f4a 28%, #18C8FF 42%, #2F6BFF 60%, #050816 75%)",
+                      boxShadow:
+                        "0 0 12px rgba(24,200,255,0.9), 0 0 28px rgba(47,107,255,0.6), inset 0 0 10px rgba(24,200,255,0.7)",
+                    }}
+                  />
+                  {/* spokes */}
+                  <div className="absolute inset-[30%] rounded-full border border-[rgba(111,219,255,0.6)]" />
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="w-[2px] h-full bg-[rgba(111,219,255,0.5)]" />
+                    <div className="absolute w-full h-[2px] bg-[rgba(111,219,255,0.5)]" />
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="mt-6 flex items-center justify-between gap-3 flex-wrap">
               <div className="glass rounded-2xl px-4 py-3 flex items-center gap-3">
                 <div className="h-2 w-2 rounded-full bg-[#18C8FF] shadow-[0_0_12px_#18C8FF] animate-pulse" />
                 <div className="text-xs">
