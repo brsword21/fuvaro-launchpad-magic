@@ -121,19 +121,23 @@ function Hero() {
   );
 }
 
-function Benefits() {
-  const cards = [
+function Product() {
+  const items = [
     {
-      icon: Calculator,
-      title: "Kalkulator kosztów tras",
-      desc: "Policz paliwo, opłaty drogowe, ZUS kierowcy i marżę w kilka sekund. Wiedz, czy trasa się opłaca, zanim klikniesz „przyjmuję”.",
-      tag: "Profitability engine",
-    },
-    {
-      icon: Radio,
+      tag: "Real-time intel",
       title: "Sprawdzone informacje o punktach logistycznych",
       desc: "Czasy rozładunku, kolejki, parkingi, kontrole. Dane potwierdzane na żywo przez społeczność kierowców na trasie.",
-      tag: "Real-time intel",
+      img: appMobile,
+      alt: "Fuvaro — aplikacja mobilna dla kierowców",
+      reverse: false,
+    },
+    {
+      tag: "Profitability engine",
+      title: "Kalkulator kosztów tras",
+      desc: "Policz paliwo, opłaty drogowe, ZUS kierowcy i marżę w kilka sekund. Wiedz, czy trasa się opłaca, zanim klikniesz „przyjmuję”.",
+      img: appDesktop,
+      alt: "Fuvaro — kalkulator kosztów trasy dla spedytora",
+      reverse: true,
     },
   ];
   return (
@@ -146,137 +150,6 @@ function Benefits() {
             <span className="text-gradient-cyan">zarządzania transportem</span>.
           </h2>
         </div>
-        <div className="mt-14 grid md:grid-cols-2 gap-6">
-          {cards.map((c) => (
-            <div key={c.title} className="group relative rounded-3xl glass p-8 overflow-hidden">
-              <div className="absolute -top-24 -right-24 h-64 w-64 rounded-full blur-3xl opacity-40 group-hover:opacity-70 transition-opacity"
-                style={{ background: "radial-gradient(closest-side, #18C8FF, transparent)" }} />
-              <div className="relative">
-                <div className="inline-flex items-center justify-center h-12 w-12 rounded-2xl bg-[#0B1730] border border-[rgba(24,200,255,0.3)] glow-cyan">
-                  <c.icon className="h-5 w-5 text-[color:var(--electric)]" />
-                </div>
-                <div className="mt-6 text-[11px] uppercase tracking-[0.18em] text-[color:var(--electric)]">
-                  {c.tag}
-                </div>
-                <h3 className="mt-2 text-2xl font-semibold">{c.title}</h3>
-                <p className="mt-3 text-[color:var(--muted-foreground)] leading-relaxed">
-                  {c.desc}
-                </p>
-
-                <div className="mt-8 h-40 rounded-2xl border border-[rgba(24,200,255,0.18)] bg-[#050816]/60 relative overflow-hidden">
-                  <div className="absolute inset-0 bg-grid opacity-60" />
-                  <div className="absolute inset-x-6 bottom-6 flex items-end gap-1.5">
-                    {[28, 52, 38, 64, 80, 46, 72, 90, 58, 76, 96, 68].map((h, i) => (
-                      <div
-                        key={i}
-                        className="flex-1 rounded-sm"
-                        style={{
-                          height: `${h}%`,
-                          background: "linear-gradient(180deg, #6FDBFF, #2F6BFF)",
-                          opacity: 0.3 + (i / 12) * 0.7,
-                        }}
-                      />
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function HowItWorks() {
-  const steps = [
-    {
-      icon: Calculator,
-      title: "Oblicz koszt trasy",
-      desc: "Wprowadź punkty A → B, ładunek i pojazd. Fuvaro pokazuje pełny koszt i marżę w czasie rzeczywistym.",
-    },
-    {
-      icon: MapPin,
-      title: "Sprawdź sytuację na miejscu",
-      desc: "Zobacz live raporty od kierowców: czasy rozładunku, korki, kontrole i sytuacja na punktach logistycznych.",
-    },
-    {
-      icon: Compass,
-      title: "Podejmij lepszą decyzję przed wyjazdem",
-      desc: "Zaakceptuj, odrzuć lub renegocjuj trasę z pełnymi danymi — nie na ślepo.",
-    },
-  ];
-  return (
-    <section id="jak-to-dziala" className="relative py-28">
-      <div className="mx-auto max-w-7xl px-6 lg:px-10">
-        <div className="flex items-end justify-between flex-wrap gap-6">
-          <div className="max-w-2xl">
-            <span className="chip">Workflow</span>
-            <h2 className="mt-5 text-4xl lg:text-5xl font-bold leading-tight">
-              Jak to działa
-            </h2>
-            <p className="mt-4 text-[color:var(--muted-foreground)]">
-              Trzy kroki dzielą Cię od świadomych decyzji transportowych.
-            </p>
-          </div>
-        </div>
-
-        <div className="mt-14 relative">
-          <div className="hidden md:block absolute left-0 right-0 top-12 h-px section-divider" />
-          <div className="grid md:grid-cols-3 gap-6">
-            {steps.map((s, i) => (
-              <div key={s.title} className="relative rounded-3xl glass p-8">
-                <div className="flex items-center justify-between">
-                  <div className="inline-flex items-center justify-center h-12 w-12 rounded-2xl bg-[#0B1730] border border-[rgba(24,200,255,0.3)] glow-cyan">
-                    <s.icon className="h-5 w-5 text-[color:var(--electric)]" />
-                  </div>
-                  <span className="font-display text-5xl font-bold text-transparent" style={{ WebkitTextStroke: "1px rgba(111,219,255,0.35)" }}>
-                    0{i + 1}
-                  </span>
-                </div>
-                <h3 className="mt-6 text-xl font-semibold">{s.title}</h3>
-                <p className="mt-3 text-sm text-[color:var(--muted-foreground)] leading-relaxed">
-                  {s.desc}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-function Showcase() {
-  const items = [
-    {
-      tag: "Aplikacja mobilna dla kierowców",
-      title: "Społeczność kierowców w terenie",
-      desc: "Kierowcy oceniają punkty logistyczne, dzielą się czasem oczekiwania i sytuacją na miejscu — w czasie rzeczywistym.",
-      img: appMobile,
-      alt: "Fuvaro — aplikacja mobilna dla kierowców",
-      reverse: false,
-    },
-    {
-      tag: "Panel dla spedytora",
-      title: "Kalkulator kosztów trasy",
-      desc: "Pełna kalkulacja paliwa, opłat, czasu kierowcy i marży — z mapą trasy i danymi z miejsc na żywo.",
-      img: appDesktop,
-      alt: "Fuvaro — kalkulator kosztów trasy dla spedytora",
-      reverse: true,
-    },
-  ];
-  return (
-    <section id="aplikacja" className="relative py-28">
-      <div className="mx-auto max-w-7xl px-6 lg:px-10">
-        <div className="max-w-2xl">
-          <span className="chip">Podgląd</span>
-          <h2 className="mt-5 text-4xl lg:text-5xl font-bold leading-tight">
-            Jedno narzędzie. <span className="text-gradient-cyan">Dwie perspektywy.</span>
-          </h2>
-          <p className="mt-4 text-[color:var(--muted-foreground)]">
-            Aplikacja dla kierowców i panel dla spedytora — połączone w czasie rzeczywistym.
-          </p>
-        </div>
 
         <div className="mt-16 space-y-24">
           {items.map((it) => {
@@ -285,9 +158,7 @@ function Showcase() {
               <div
                 key={it.title}
                 className={`grid gap-10 items-center ${
-                  isWide
-                    ? "lg:grid-cols-12"
-                    : "lg:grid-cols-2"
+                  isWide ? "lg:grid-cols-12" : "lg:grid-cols-2"
                 } ${it.reverse ? "lg:[&>*:first-child]:order-2" : ""}`}
               >
                 <div className={`relative ${isWide ? "lg:col-span-8" : ""}`}>
@@ -321,6 +192,7 @@ function Showcase() {
     </section>
   );
 }
+
 
 
 
